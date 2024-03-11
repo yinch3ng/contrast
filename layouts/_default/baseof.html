@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode | default "en" }}">
+<title>{{ .Site.Title }}</title>
+<meta charset="utf-8">
+{{- if or .Description .Site.Params.description }}
+<meta name="description" content="{{ .Description | default .Site.Params.description }}">
+{{- end }}
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="{{ .Site.BaseURL }}css/minimal.css">
+<link rel="canonical" href="{{ .Permalink }}">
+<link rel="alternate" type="application/rss+xml" href="{{ with .OutputFormats.Get "RSS" }}{{ .RelPermalink }}{{ end }}" title="{{ .Site.Title }}">
+{{- if or .Params.math .Site.Params.math }}
+<link rel="stylesheet" href="{{ .Site.BaseURL }}katex/katex.min.css">
+<script defer src="{{ .Site.BaseURL }}katex/katex.min.js"></script>
+<script defer src="{{ .Site.BaseURL }}katex/contrib/auto-render.min.js" onload="renderMathInElement(document.body)"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\(', right: '\\)', display: false},
+              {left: '\\[', right: '\\]', display: true}
+          ],
+          throwOnError : false
+        });
+    });
+</script>
+{{- end }}
+
+{{- if or .Params.mermaid .Site.Params.mermaid }}
+<!-- <script src="{{ .Site.BaseURL }}mermaid.js"> -->
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({ startOnLoad: true , theme: "neutral" });
+</script>
+{{ end }}
+
+<header>
+  {{ if not (gt (len .Site.Menus) 1) }}
+    <a href="{{ .Site.BaseURL }}" class="title">{{ .Site.Title }}</a>
+  {{ end }}
+  {{ range $menu, $items := .Site.Menus }}
+    <nav>
+    {{ range $items }}
+      <a href="{{ .URL }}">{{ .Name }}</a>
+    {{ end }}
+    </nav>
+  {{ end }}
+</header>
+
+{{- block "main" . }}{{- end }}
+
+</html>

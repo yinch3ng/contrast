@@ -1,0 +1,38 @@
+baseURL = 'https://yinch3ng.github.io/'
+languageCode = 'en-us'
+title = 'ind3x'
+theme = 'contrast'
+disableKinds = ['sitemap', 'rss']
+
+[taxonomies]
+  tag = 'tags'
+
+[params]
+  excerpts = false
+  math = false
+  mermaid = false
+
+[menus]
+  main = [
+      {name = 'Tags', url = '/tags/', weight = 1},
+      {name = 'About', url = '/about/', weight = 2},
+  ]
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+#   [markup.highlight]
+#     anchorLineNos = false
+#     codeFences = false
+#     guessSyntax = false
+#     hl_Lines = ""
+#     lineAnchors = ""
+#     lineNoStart = ""
+#     lineNos = false
+#     lineNumbersInTable = false
+#     noClasses = false
+#     style = ""
+#     tabWidth = ""
+
+
