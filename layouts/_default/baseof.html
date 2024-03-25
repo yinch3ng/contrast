@@ -29,11 +29,16 @@
 {{- end }}
 
 {{- if or .Params.mermaid .Site.Params.mermaid }}
-<!-- <script src="{{ .Site.BaseURL }}mermaid.js"> -->
-<script type="module">
+<script src="{{ .Site.BaseURL }}mermaid.min.js"></script>
+<script>
+      mermaid.initialize({ startOnLoad: 'true',
+	                       securityLevel: 'loose',
+						   theme: 'neutral'});
+    </script>
+<!-- <script type="module">
   import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs';
   mermaid.initialize({ startOnLoad: true , theme: "neutral" });
-</script>
+</script> -->
 {{ end }}
 
 <header>
